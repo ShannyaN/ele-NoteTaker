@@ -31,9 +31,11 @@ app.get('/api/notes/:title',(req,res)=>{
     }
 })
 app.post('/api/notes', (req,res)=>{
+    const {title} = req.body.title;
+    const {text} = req.body.text;
     const newNote ={
-        title: req.body.title,
-        text: req.body.text
+        title,
+        text
     }
     notes.push(newNote);
     return res.json(newNote);
