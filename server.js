@@ -1,14 +1,15 @@
 const express = require('express');
 const app = express();
 const path=require('path');
+const fs = require('fs');
 
 //DATA
 const notes = require('./db/db.json')
 
 const PORT = process.env.PORT || 3001;
 //Middleware
-//app.use(express.json());
-//app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
 
 app.get('/',(req,res)=>{
@@ -20,12 +21,12 @@ app.get('/notes',(req,res)=>{
 })
 
 app.get('/api/notes',(req,res)=>{
-    res.json(notes)
+    res.json(notes);
 })
 app.get('/api/notes/:title',(req,res)=>{
     for (let i = 0; i < notes.length; i++) {
         if (req.params.title === notes[i].title){
-            return res.json(notes[i])
+            res.json(notes[i])
         };
         
     }
@@ -38,6 +39,10 @@ app.post('/api/notes', (req,res)=>{
         text
     }
     notes.push(newNote);
-    return res.json(newNote);
+    const notesJSON = JSON.stringify(notes, null, 2);
+    fs.writeFile('./db/db.json', notesJSON)
+        .then(()=> {
+            res.json(newNote);
+        })
 })
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
