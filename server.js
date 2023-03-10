@@ -24,7 +24,7 @@ app.get('/api/notes',(req,res)=>{
 })
 app.get('/api/notes/:title',(req,res)=>{
     for (let i = 0; i < notes.length; i++) {
-        if (req.params.title=== notes[i].title){
+        if (req.params.title === notes[i].title){
             return res.json(notes[i])
         };
         
@@ -36,6 +36,6 @@ app.post('/api/notes', (req,res)=>{
         text: req.body.text
     }
     notes.push(newNote);
-    res.json(newNote);
+    return res.json(newNote);
 })
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
