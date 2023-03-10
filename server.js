@@ -22,4 +22,12 @@ app.get('/notes',(req,res)=>{
 app.get('/api/notes',(req,res)=>{
     res.json(notes)
 })
+app.get('/api/notes/:title',(req,res)=>{
+    for (let i = 0; i < notes.length; i++) {
+        if (req.params.title=== notes[i].title){
+            return res.json(notes[i])
+        };
+        
+    }
+})
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
