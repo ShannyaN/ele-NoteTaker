@@ -1,5 +1,8 @@
 {
-  "name": "note-taker",
+  "name": "ele-NoteTaker",
+  "lockfileVersion": 2,
+  "requires": true,
+  "packages": {},
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
