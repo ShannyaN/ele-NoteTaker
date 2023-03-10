@@ -30,4 +30,12 @@ app.get('/api/notes/:title',(req,res)=>{
         
     }
 })
+app.post('/api/notes', (req,res)=>{
+    const newNote ={
+        title: req.body.title,
+        text: req.body.text
+    }
+    notes.push(newNote);
+    res.json(newNote);
+})
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
