@@ -57,4 +57,16 @@ app.post('/api/notes', (req,res)=> {
       });
 })
 
+app.delete('/api/notes/:id',(req,res)=>{
+    for (let i = 0; i < notes.length; i++) {
+        if (req.params.id === notes[i].id){
+            notes.splice(i,1);
+            res.json(notes[i] + "Status: deleted ")
+            return console.log("Successful deletion of "+ notes[i])
+        }else{
+            return res.status(404)};
+    }
+    
+})
+
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
