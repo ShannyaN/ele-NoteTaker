@@ -71,10 +71,10 @@ app.delete('/api/notes/:id',(req,res)=>{
                     res.json(notes);
                 }
               });
-            return res.json(notes[i])
-        }else{
-            return res.status(404)};
-    }
+           // return res.json(notes[i])
+        //}else{
+           // return res.status(404)};
+    }}
     
 })
 
