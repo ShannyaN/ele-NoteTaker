@@ -47,10 +47,13 @@ app.post('/api/notes', (req,res)=>{
     notes.push(newNote);
     console.log(notes)
     const notesJSON = JSON.stringify(notes, null, 2);
-    fs.writeFile('./db/db.json', notesJSON)
-        .then(()=> {
+    fs.writeFile('./db/db.json', notesJSON, err => {
+        if (err) {
+          console.error(err);
+        } else
             res.json(newNote);
         })
+
 })
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
