@@ -37,25 +37,34 @@ app.get('/api/notes/:title',(req,res)=>{
     
 })
 
-app.post('/api/notes', (req,res)=>{
+app.post('/api/notes', (req,res)=> {
     const {title} = req.body;
-    console.log("title: " + {title})
     const {text} = req.body;
-    console.log("text: " + {text})
-    const newNote ={
+    const newNote = {
         title,
-        text
+        text,
     }
-    console.log(newNote);
+    // //console.log("request:" + request);
+    // const {title} = req.body;
+    // console.log("title: " + title)
+    // const {text} = req.body;
+    // console.log("text: " + text)
+    // const newNote ={
+    //     title,
+    //     text
+    // }
+    console.log("NN:" + newNote);
     notes.push(newNote);
     console.log(notes)
-    const notesJSON = JSON.stringify(notes, null, 2);
-    fs.writeFile('./db/db.json', notesJSON, err => {
+    //const notesJSON = JSON.stringify(notes, null, 2);
+    fs.writeFile('./db/db.json', JSON.stringify(notes), err => {
         if (err) {
           console.error(err);
-        } else
-            res.json(newNote);
-     })
+        }else{
+            res.json(notes)
+        }
+        // file written successfully
+      });
 })
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
