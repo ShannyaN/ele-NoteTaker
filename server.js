@@ -9,7 +9,7 @@ const notes = require('./db/db.json')
 const PORT = process.env.PORT || 3001;
 //Middleware
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:false}));
 app.use(express.static('public'));
 
 app.get('/',(req,res)=>{
@@ -38,10 +38,13 @@ app.get('/api/notes/:title',(req,res)=>{
 })
 
 app.post('/api/notes', (req,res)=>{
-    const {rawNote} = req.body;
+    const {title} = req.body;
+    console.log("title: " + {title})
+    const {text} = req.body;
+    console.log("text: " + {text})
     const newNote ={
-        title : {rawNote}.title,
-        text : {rawNote}.text
+        title,
+        text
     }
     console.log(newNote);
     notes.push(newNote);
@@ -52,8 +55,7 @@ app.post('/api/notes', (req,res)=>{
           console.error(err);
         } else
             res.json(newNote);
-        })
-
+     })
 })
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
