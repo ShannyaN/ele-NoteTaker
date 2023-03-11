@@ -9,7 +9,7 @@ const {v4: uuidv4} = require('uuid');
 const notes = require('./db/db.json')
 const PORT = process.env.PORT || 3001;
 
-//Middleware
+//MIDDLEWARE  
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(express.static('public'));
@@ -31,27 +31,17 @@ app.get('/api/notes',(req,res)=>{
     return console.log("success");
 })
 //GET SINGLE
-/*app.get('/api/notes/:id',(req,res)=>{
-    let note;
-    for (let i = 0; i < notes.length; i++) {
-        if (req.params.id === notes[i].id){
-            note = notes[i];
-            return console.log("success");
-        }else{
-            return res.status(404)};
-    }
-    res.json(note);
-})
-*/
 app.get('/api/notes/:id', (req, res) => {
     let note;
-    for (let i = 0; i < notes.length; i++) {
-        if (req.params.id === notes[i].id) {
+    for (let i = 0; i < notes.length; i++) { 
+        if (req.params.id === notes[i].id) {//FINDING NOTE WITH MATCHING ID IN ARRAY
             note = notes[i];
-        }
+            res.json(note);
+            return console.log("success");
+        
     }
-    res.json(note);
-});
+     
+}});
 //POST NOTE
 app.post('/api/notes', (req,res)=> {
     const {title} = req.body;
@@ -78,15 +68,16 @@ app.delete('/api/notes/:id',(req,res)=>{
         if (req.params.id === notes[i].id){ //WHEN FOUND
             notes.splice(i,1); //REMOVE FROM ARRAY
             console.log("Successful deletion");
+            res.status(200);
             fs.writeFile('./db/db.json', JSON.stringify(notes), err => { //UPDATE DATABASE FILE
                 if (err) {
                   console.error(err);
                 }else{
                     res.json(notes);
                 }
+                return
               });
-            }
-        res.status(404);
+            } 
     }
     
 })
