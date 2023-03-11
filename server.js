@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path=require('path');
 const fs = require('fs');
+const {v4: uuidv4} = require('uuid');
 
 //DATA
 const notes = require('./db/db.json')
@@ -26,9 +27,9 @@ app.get('/api/notes',(req,res)=>{
     res.json(notes);
     return console.log("success")
 })
-app.get('/api/notes/:title',(req,res)=>{
+app.get('/api/notes/:id',(req,res)=>{
     for (let i = 0; i < notes.length; i++) {
-        if (req.params.title === notes[i].title){
+        if (req.params.id === notes[i].id){
             res.json(notes[i])
             return console.log("success")
         }else{
@@ -41,29 +42,18 @@ app.post('/api/notes', (req,res)=> {
     const {title} = req.body;
     const {text} = req.body;
     const newNote = {
+        id : uuidv4(),
         title,
         text,
-    }
-    // //console.log("request:" + request);
-    // const {title} = req.body;
-    // console.log("title: " + title)
-    // const {text} = req.body;
-    // console.log("text: " + text)
-    // const newNote ={
-    //     title,
-    //     text
-    // }
-    console.log("NN:" + newNote);
+    };
     notes.push(newNote);
     console.log(notes)
-    //const notesJSON = JSON.stringify(notes, null, 2);
     fs.writeFile('./db/db.json', JSON.stringify(notes), err => {
         if (err) {
           console.error(err);
         }else{
-            res.json(notes)
+            res.json(notes);
         }
-        // file written successfully
       });
 })
 
