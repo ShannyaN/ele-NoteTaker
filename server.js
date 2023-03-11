@@ -44,7 +44,7 @@ app.post('/api/notes', (req,res)=> {
     const {title} = req.body;
     const {text} = req.body;
     const newNote = {
-        id:uuidv4(),
+        id: uuidv4(),
         title,
         text,
     };
@@ -63,7 +63,7 @@ app.delete('/api/notes/:id',(req,res)=>{
     for (let i = 0; i < notes.length; i++) {
         if (req.params.id === notes[i].id){
             notes.splice(i,1);
-            console.log("Successful deletion of "+ notes[i])
+            console.log("Successful deletion");
             fs.writeFile('./db/db.json', JSON.stringify(notes), err => {
                 if (err) {
                   console.error(err);
