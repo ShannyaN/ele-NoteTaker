@@ -38,8 +38,8 @@ app.get('/api/notes/:title',(req,res)=>{
 })
 
 app.post('/api/notes', (req,res)=>{
-    const {title} = req.body.title;
-    const {text} = req.body.text;
+    const {title} = req.title;
+    const {text} = req.text;
     const newNote ={
         title,
         text
