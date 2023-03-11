@@ -4,13 +4,11 @@
    
 1. [Description](#description)  
 2. [Installation](#installation)  
-3. [Usage](#usage)  
-4. [License](#license)  
-5. [Contributions](#contributions)  
-6. [Tests](#tests)  
-7. [Questions](#questions)  
-8. [Screenshots](#screenshots)  
-9. [Links](#links)  
+3. [Usage](#usage)    
+4. [Contributions](#contributions)  
+5. [Questions](#questions)  
+6. [Screenshots](#screenshots)  
+7. [Links](#links)  
 ## Description  
 Web application using node, heroku, and express to create a list of notes where single notes can be saved and added to a list,clicked to be displayed, and deleted.  
   
